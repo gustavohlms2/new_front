@@ -141,13 +141,13 @@ export default {
     this.loginValid();
   },
   mounted() {
-    axios.get('http://localhost:5000/user', { headers: { token: localStorage.getItem('token')}})
+    axios.get('http://localhost:5050/user', { headers: { token: localStorage.getItem('token')}})
       .then(res => {
         this.name = res.data.user.name;
         this.email = res.data.user.email;
       });
 
-    //axios.get('http://localhost:5000/standard'); //destroyed
+    //axios.get('http://localhost:5050/standard'); //destroyed
   },
   beforeDestroy: function(){
     clearInterval( this.counterInterval )
