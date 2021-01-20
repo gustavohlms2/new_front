@@ -6,7 +6,8 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
-
+var serveStatic = require('serve-static');
+var path = require('path')
 //const WebService = require('./models/WebService');
 // o inicial-- mongoose.connect('mongodb://admin:admin123@ds155616.mlab.com:55616/auth-sandbox');
 
@@ -18,7 +19,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(serveStatic(path.join(__dirname, 'dist')));
 console.log("Server started...");
 
 
