@@ -1,13 +1,15 @@
 const port = process.env.PORT || 5050;
 const express = require('express');
+const serveStatic = require('serve-static');
+const path = require('path');
+
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const User = require('./models/User');
-var serveStatic = require('serve-static');
-var path = require('path')
+
 //const WebService = require('./models/WebService');
 // o inicial-- mongoose.connect('mongodb://admin:admin123@ds155616.mlab.com:55616/auth-sandbox');
 
@@ -19,9 +21,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(serveStatic(path.join(__dirname, 'dist')));
-console.log("Server started...");
+app.use('/', serveStatic(path.join(__dirname, '/dist')));
 
+console.log("Server started...");
 
 //routes
 app.post('/signup', (req, res, next) => {
@@ -107,8 +109,7 @@ app.get(/.*/, function(req, res) {
 //app.listen(port);
 
 
-app.listen(port, (err) => {
+app.listen((process.env.PORT || 5050), (err) => {
   if (err) return console.log(err);
   console.log('server running on port ' + port);
 })
-
